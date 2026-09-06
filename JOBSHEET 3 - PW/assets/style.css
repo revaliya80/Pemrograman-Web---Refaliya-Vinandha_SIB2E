@@ -21,7 +21,7 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ===== Header & Navbar (Flexbox) ===== */
+/* ===== Header & Navbar ===== */
 header {
     background-color: #1d5b8a;
     color: #fff;
@@ -36,10 +36,34 @@ header h1 {
     font-size: 1.4rem;
 }
 
+/* ===== Hamburger ===== */
+.nav-toggle {
+    display: none;
+}
+
+.nav-toggle-label {
+    display: block;
+    font-size: 1.6rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+header nav {
+    display: none;
+    width: 100%;
+    order: 3;
+    margin-top: 1rem;
+}
+
+.nav-toggle:checked ~ nav {
+    display: block;
+}
+
 header nav ul {
     list-style: none;
     display: flex;
-    gap: 1.25rem;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 header nav a {
@@ -49,7 +73,7 @@ header nav a {
 
 /* ===== Main Layout ===== */
 main {
-    max-width: 1000px;
+    max-width: 100%;
     margin: 2rem auto;
     padding: 0 1.5rem;
 }
@@ -67,10 +91,10 @@ section h2 {
     color: #1d5b8a;
 }
 
-/* ===== Kartu Statistik (CSS Grid) ===== */
+/* ===== Kartu Statistik ===== */
 main section:nth-of-type(2) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
 }
 
@@ -94,12 +118,17 @@ main section:nth-of-type(2) article p {
 }
 
 /* ===== Tabel ===== */
+.table-responsive {
+    overflow-x: auto;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     text-align: left;
     padding: 0.65rem 0.75rem;
     border-bottom: 1px solid #e2e6ea;
@@ -152,7 +181,7 @@ form label {
 form input,
 form select {
     width: 100%;
-    max-width: 400px;
+    max-width: 100%;
     padding: 0.55rem 0.7rem;
     border: 1px solid #cdd4da;
     border-radius: 4px;
@@ -173,83 +202,6 @@ form button[type="submit"]:hover {
     background-color: #164869;
 }
 
-/* ===== Footer ===== */
-footer {
-    text-align: center;
-    padding: 1.25rem;
-    color: #7a8794;
-    font-size: 0.9rem;
-}
-
-/* ===== Tabel Responsif ===== */
-.table-responsive {
-    overflow-x: auto;
-}
-
-/* ===== Hamburger Menu (checkbox hack) ===== */
-.nav-toggle {
-    display: none;
-}
-
-.nav-toggle-label {
-    display: none;
-    font-size: 1.6rem;
-    color: #fff;
-    cursor: pointer;
-}
-
-/* ===== Responsive Breakpoints ===== */
-
-/* Tablet ke bawah */
-@media (max-width: 900px) {
-    main section:nth-of-type(2) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-    header {
-        position: relative;
-    }
-
-    .nav-toggle-label {
-        display: block;
-    }
-
-    header nav {
-        display: none;
-        width: 100%;
-        order: 3;
-        margin-top: 1rem;
-    }
-
-    .nav-toggle:checked ~ nav {
-        display: block;
-    }
-
-    header nav ul {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    main section:nth-of-type(2) {
-        grid-template-columns: 1fr;
-    }
-
-    form input,
-    form select {
-        max-width: 100%;
-    }
-}
-
-/* ===== Responsive Monitor Sangat Lebar ===== */
-@media (min-width: 1400px) {
-    main {
-        max-width: 1200px;
-    }
-}
-
 /* ===== Kode Responsif ===== */
 pre {
     overflow-x: auto;
@@ -258,4 +210,68 @@ pre {
     background-color: #f7f9fb;
     border: 1px solid #e2e6ea;
     border-radius: 6px;
+    white-space: pre;
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 1.25rem;
+    color: #7a8794;
+    font-size: 0.9rem;
+}
+
+/* ================================================= */
+/* ===== Layar Tablet - min-width: 481px =========== */
+/* ================================================= */
+@media (min-width: 481px) {
+
+    header nav {
+        display: block;
+        width: auto;
+        order: initial;
+        margin-top: 0;
+    }
+
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header nav ul {
+        flex-direction: row;
+        gap: 1.25rem;
+    }
+
+    main {
+        max-width: 1000px;
+    }
+
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    form input,
+    form select {
+        max-width: 400px;
+    }
+}
+
+/* ================================================= */
+/* ===== Layar Desktop - min-width: 901px ========== */
+/* ================================================= */
+@media (min-width: 901px) {
+
+    main section:nth-of-type(2) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ================================================= */
+/* ===== Monitor Sangat Lebar - min-width: 1400px == */
+/* ================================================= */
+@media (min-width: 1400px) {
+
+    main {
+        max-width: 1200px;
+    }
 }
