@@ -249,3 +249,13 @@ footer {
         max-width: 1200px;
     }
 }
+
+/* ===== Kode Responsif ===== */
+pre {
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 1rem;
+    background-color: #f7f9fb;
+    border: 1px solid #e2e6ea;
+    border-radius: 6px;
+}
