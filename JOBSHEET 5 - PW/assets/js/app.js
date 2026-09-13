@@ -27,17 +27,38 @@ function initHapusConfirm() {
 function initTableFilter() {
     const input = document.getElementById("search-input");
     const table = document.querySelector(".table-responsive table");
+
     if (!input || !table) return;
 
     input.addEventListener("keyup", function () {
         const keyword = input.value.toLowerCase();
+
+        // Mengambil nomor kolom yang akan dicari
+        const columnNumber = parseInt(
+            input.dataset.searchColumn || "1",
+            10
+        );
+
         const rows = table.querySelectorAll("tbody tr");
+
         rows.forEach(function (row) {
-            const teks = row.textContent.toLowerCase();
-            row.style.display = teks.includes(keyword) ? "" : "none";
+            // Mengambil semua cell pada baris
+            const cells = row.querySelectorAll("td");
+
+            // Mengambil cell sesuai nomor kolom
+            const cell = cells[columnNumber - 1];
+
+            const teks = cell
+                ? cell.textContent.toLowerCase()
+                : "";
+
+            row.style.display = teks.includes(keyword)
+                ? ""
+                : "none";
         });
     });
 }
+     
 
 // ===== Validasi form (client-side) =====
 function tampilkanError(input, pesan) {
