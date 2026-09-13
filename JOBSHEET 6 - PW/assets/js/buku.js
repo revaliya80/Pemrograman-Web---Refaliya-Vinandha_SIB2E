@@ -3,7 +3,8 @@ function muatDaftarBuku() {
         "judul",
         "pengarang",
         "tahun",
-        "stok"
+        "stok",
+        "kategori"
     ]);
 }
 

@@ -38,7 +38,7 @@ async function muatData(namaFile, daftarKunci) {
         });
     } catch (err) {
         tbody.innerHTML =
-            "<tr><td colspan=\"5\">Gagal memuat data: " +
+            "<tr><td colspan=\"" + (daftarKunci.length + 1) + "\">Gagal memuat data: " +
             err.message +
             "</td></tr>";
     } finally {
