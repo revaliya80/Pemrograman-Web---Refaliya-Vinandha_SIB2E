@@ -18,6 +18,7 @@ function initHapusConfirm() {
             const yakin = confirm("Yakin ingin menghapus \"" + nama + "\"?");
             if (yakin && row) {
                 row.remove();
+                updateTableCounter();
             }
         });
     });
@@ -56,7 +57,9 @@ function initTableFilter() {
                 ? ""
                 : "none";
         });
+        updateTableCounter();
     });
+    updateTableCounter();
 }
      
 
@@ -139,6 +142,26 @@ function initValidasiForm() {
             e.preventDefault();
         }
     });
+}
+
+// ===== Counter jumlah data =====
+function updateTableCounter() {
+    const table = document.querySelector(".table-responsive table");
+    const counter = document.getElementById("table-counter");
+
+    if (!table || !counter) return;
+
+    const rows = table.querySelectorAll("tbody tr");
+    let visibleRows = 0;
+
+    rows.forEach(function (row) {
+        if (row.style.display !== "none") {
+            visibleRows++;
+        }
+    });
+
+    counter.textContent =
+        "Menampilkan " + visibleRows + " dari " + rows.length + " data";
 }
 
 document.addEventListener("DOMContentLoaded", function () {

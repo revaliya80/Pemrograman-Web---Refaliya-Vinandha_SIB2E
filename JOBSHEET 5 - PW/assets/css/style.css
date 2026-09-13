@@ -265,3 +265,10 @@ footer {
         max-width: 100%;
     }
 }
+/* ===== Counter Tabel ===== */
+.table-counter {
+    margin-bottom: 0.75rem;
+    color: #55677a;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
