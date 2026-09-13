@@ -38,4 +38,12 @@ async function muatDaftarBuku() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", muatDaftarBuku);
+document.addEventListener("DOMContentLoaded", function () {
+    muatDaftarBuku();
+
+    const tombolMuatUlang = document.getElementById("btn-muat-ulang");
+
+    if (tombolMuatUlang) {
+        tombolMuatUlang.addEventListener("click", muatDaftarBuku);
+    }
+});
