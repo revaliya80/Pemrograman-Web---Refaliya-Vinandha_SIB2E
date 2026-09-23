@@ -6,6 +6,16 @@ $noAnggota = trim($_POST['no_anggota'] ?? '');
 $alamat = trim($_POST['alamat'] ?? '');
 $noHp = trim($_POST['no_hp'] ?? '');
 
+if ($nama === '' || $no_anggota === '') {
+    $_SESSION['flash'] = [
+        'type' => 'error',
+        'pesan' => 'Nama dan nomor anggota wajib diisi.'
+    ];
+
+    header('Location: tambah.php');
+    exit;
+}
+
 $errors = [];
 if ($nama === '') {
     $errors[] = "Nama wajib diisi.";
