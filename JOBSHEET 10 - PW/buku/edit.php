@@ -1,5 +1,14 @@
 <?php
 require __DIR__ . '/../includes/auth.php';
+if ($_SESSION['role'] !== 'admin') {
+    $_SESSION['flash'] = [
+        'type' => 'error',
+        'pesan' => 'Akses ditolak. Hanya admin yang boleh mengedit buku.'
+    ];
+
+    header('Location: list.php');
+    exit;
+}
 $page_title = "Edit Buku";
 include __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../includes/koneksi.php';
