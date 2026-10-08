@@ -23,3 +23,12 @@ function csrf_verify()
         die('Permintaan ditolak: token CSRF tidak valid atau kedaluwarsa.');
     }
 }
+function csrf_verify_get()
+{
+    $token = $_GET['csrf_token'] ?? '';
+
+    if ($token === '' || !hash_equals($_SESSION['csrf_token'] ?? '', $token)) {
+        http_response_code(403);
+        die('Permintaan ditolak: token CSRF tidak valid atau kedaluwarsa.');
+    }
+}

@@ -3,6 +3,8 @@ $page_title = "Daftar Buku";
 include __DIR__ . '/../includes/header.php';
 require __DIR__ . '/../includes/koneksi.php';
 
+csrf_verify_get();
+
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 
@@ -38,6 +40,7 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
 
             <div class="search-box">
                 <form method="get" action="list.php">
+                      <?php echo csrf_field(); ?>
                     <span>
                         <label for="search-input">Cari Judul Buku</label><br>
                         <input type="text" id="search-input" name="q" value="<?php echo e($keyword); ?>" placeholder="Ketik judul buku...">
@@ -86,8 +89,8 @@ $totalPages = max(1, (int) ceil($totalRows / $perPage));
 
             <nav class="pagination">
                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <a href="list.php?page=<?php echo $i; ?><?php echo $keyword !== '' ? '&q=' . urlencode($keyword) : ''; ?>"
-                   class="<?php echo $i === $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
+               <a href="list.php?page=<?php echo $i; ?>&csrf_token=<?php echo urlencode(csrf_token()); ?><?php echo $keyword !== '' ? '&q=' . urlencode($keyword) : ''; ?>"
+                    class="<?php echo $i === $page ? 'active' : ''; ?>"><?php echo $i; ?></a>
                 <?php endfor; ?>
             </nav>
         </section>
