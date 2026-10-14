@@ -15,6 +15,29 @@ if ($anggotaId === '' || $bukuId === '') {
 }
 
 try {
+    
+    $cekTerlambat = $pdo->prepare(
+        "SELECT COUNT(*)
+        FROM peminjaman
+        WHERE anggota_id = :anggota_id
+        AND status = 'dipinjam'
+        AND CURRENT_DATE - tanggal_pinjam > 14"
+    );
+
+    $cekTerlambat->execute([
+        'anggota_id' => $anggotaId
+    ]);
+
+    if ((int) $cekTerlambat->fetchColumn() > 0) {
+        $_SESSION['flash'] = [
+            'type' => 'error',
+            'pesan' => 'Peminjaman ditolak. Anggota memiliki buku yang terlambat dikembalikan lebih dari 14 hari.'
+        ];
+
+        header('Location: tambah.php');
+        exit;
+    }
+
     $pdo->beginTransaction();
 
     // Kunci baris buku (FOR UPDATE) agar stok tidak berubah oleh transaksi lain
